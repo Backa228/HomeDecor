@@ -84,6 +84,8 @@ body {
 .header {
   background-color: #A1A483;
   height: 79px;
+  z-index: 5;
+  position: relative;
 }
 
 .header__container {
@@ -92,6 +94,10 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+}
+
+.header_sideMenu {
+  display: none;
 }
 
 .header_logo {
@@ -142,4 +148,20 @@ body {
   cursor: pointer;
   border-radius: 15px;
   transform: scale(1.15);
+}
+
+@media (max-width: 850px) {
+  .header_nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+
+  .header_menu {
+    flex-direction: column;
+  }
+
+  .header_sideMenu {
+    display: block;
+  }
 }
