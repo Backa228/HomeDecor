@@ -97,12 +97,18 @@ body {
 .header{
     background-color: $dark-green;
     height: 79px;
+    z-index: 5;
+    position: relative;
     &__container {
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
         height: 100%;
+    }
+
+    &_sideMenu{
+        display: none;
     }
     
     &_logo {
@@ -151,4 +157,24 @@ body {
         transform: scale(1.15);
     }
 
+}
+
+
+@media(max-width: 850px){
+    .header{
+        &_nav{
+            // display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        &_menu{
+            flex-direction: column;
+        }
+
+        &_sideMenu{
+            display: block;
+        }
+    }
 }
