@@ -4,8 +4,8 @@ import * as flsFunctions from "./modules/functions.js";
 
 flsFunctions.isWebp();
 
-const menuToggle = document.querySelector('.sideMenu_icon');
-const sideMenu = document.querySelector('.header_nav');
+const menuToggle = document.querySelector('.sideMenu__icon');
+const sideMenu = document.querySelector('.header__nav');
 
 
 document.addEventListener('DOMContentLoaded', () => {

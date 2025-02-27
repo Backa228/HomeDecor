@@ -24,17 +24,6 @@ $maxWidth: 1920;
 $maxWidthContainer: 1256;
 $containerPadding: 25;
 
-// Брейк-поїнти
-$pc: toEm($containerWidth); // ПК, ноутбуки, деякі планшети у горизонтальному положенні
-$tablet: toEm(991.98); // Планшети, деякі телефони в горизонтальному положенні
-$mobile: toEm(767.98); // Телефони L
-$mobileSmall: toEm(479.98); // Телефони S
-
-// Тип адаптива:
-// 1 = чуйність (у контейнера немає брейкпоінтів),
-// 2 = по брейк-поїнт (контейнер змінює свою ширину по брейк-поїнт)
-$responsiveType: 1;
-
 //Percent
 @function percent($px, $from: 100) {
     $result: math.div($px, $from) * 100%;
@@ -52,6 +41,17 @@ $responsiveType: 1;
     $result: math.div($px, $current) + em;
     @return $result;
 }
+
+// Брейк-поїнти
+$pc: toEm($containerWidth); // ПК, ноутбуки, деякі планшети у горизонтальному положенні
+$tablet: toEm(991.98); // Планшети, деякі телефони в горизонтальному положенні
+$mobile: toEm(767.98); // Телефони L
+$mobileSmall: toEm(479.98); // Телефони S
+
+// Тип адаптива:
+// 1 = чуйність (у контейнера немає брейкпоінтів),
+// 2 = по брейк-поїнт (контейнер змінює свою ширину по брейк-поїнт)
+$responsiveType: 1;
 
 @mixin adaptiveValue($property, $startSize, $minSize, $keepSize: 0, $widthFrom: $containerWidth, $widthTo: $minWidth) {
     @if ($startSize==0) {
@@ -219,15 +219,21 @@ body {
     .sideMenu__icon {
         width: toRem(29);
         height: toRem(29);
+        transition: all 0.3s ease;
     }
 
     .sideMenu__icon a img {
         width: 100%;
-        transition: content 2s ease;
     }
 
-    &__logo {
+    &__logo{
         height: toRem(23);
+        @include adaptiveValue("height", 23, 13, 0, 1400, 320);
+    }
+
+    &__logo img{
+        height: 100%;
+        width: 100%;
     }
 
     &__content {
@@ -246,7 +252,8 @@ body {
     &__menu {
         display: flex;
         // gap: 31px;
-        @include adaptiveValue("gap", 31, 0);
+        @include adaptiveValue("column-gap", 31, 10, 0, 1400, 850);
+        row-gap: toRem(30);
 
         li {
             color: $white;
@@ -260,7 +267,10 @@ body {
     }
 
     &__cart {
-        padding: toRem(9) toRem(8.51) toRem(9.44) toRem(8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: toRem(9) toRem(8.51) toRem(8.44) toRem(8);
         border: solid 1px $white;
         border-radius: 50%;
         transition: transform 0.3s ease;
@@ -284,18 +294,19 @@ body {
             position: fixed;
             background-color: $dark-green;
             left: 0;
-            top: toReam(79);
+            top: toRem(79);
             // width: 50vw;
             height: 100vh;
             justify-content: center;
             align-items: start;
             padding: toRem(50);
             transform: translateX(-100%);
-            transition: transform 0.5s ease;
+            // transition: transform 0.5s ease;
         }
 
         .active_sideMenu {
             transform: translateX(0);
+            transition: transform 0.5s ease;
         }
 
         &__menu {
@@ -313,16 +324,41 @@ body {
     }
 }
 
-@media(max-width: $pc) {}
+@media (max-width: $pc) {}
 
-@media(max-width: $tablet) {
-    .header{
-        &_logo{
+@media (max-width: $tablet) {
+    .header {
+
+        // background-color: #000;
+        &__logo {
             height: toRem(18);
         }
+
     }
+
 }
 
-@media(max-width: $mobile) {}
+@media (max-width: $mobile) {}
 
-@media(max-width: $mobileSmall) {}
+@media (max-width: $mobileSmall) {
+    .header{
+        .sideMenu__icon{
+            width: toRem(25.67);
+            height: toRem(25.67);
+        }
+        &__cart {
+            padding: toRem(6) toRem(5.66) toRem(6.31) toRem(5.3);
+        a {
+            display: inline-block;
+            width: toRem(12.24);
+            height: toRem(10.892);
+        }
+
+        img {
+            width: toRem(12.24);
+            height: toRem(10.892);
+        }
+    }
+    }
+    
+}
