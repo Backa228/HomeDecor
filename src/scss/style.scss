@@ -1,7 +1,7 @@
-// @import "base/mixins";
-@use "sass:math";
-
-@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+// @use "base/mixins";
+// @use "base/variable";
+// @use "base/reset";
+// @use "layout/header";
 
 $white: #FFFFFF;
 $green: #C6C9A5;
@@ -23,6 +23,15 @@ $minWidth: 320;
 $maxWidth: 1920;
 $maxWidthContainer: 1256;
 $containerPadding: 25;
+
+
+// Тип адаптива:
+// 1 = чуйність (у контейнера немає брейкпоінтів),
+// 2 = по брейк-поїнт (контейнер змінює свою ширину по брейк-поїнт)
+$responsiveType: 1;
+
+@use "sass:math";
+
 
 //Percent
 @function percent($px, $from: 100) {
@@ -47,11 +56,6 @@ $pc: toEm($containerWidth); // ПК, ноутбуки, деякі планшет
 $tablet: toEm(991.98); // Планшети, деякі телефони в горизонтальному положенні
 $mobile: toEm(767.98); // Телефони L
 $mobileSmall: toEm(479.98); // Телефони S
-
-// Тип адаптива:
-// 1 = чуйність (у контейнера немає брейкпоінтів),
-// 2 = по брейк-поїнт (контейнер змінює свою ширину по брейк-поїнт)
-$responsiveType: 1;
 
 @mixin adaptiveValue($property, $startSize, $minSize, $keepSize: 0, $widthFrom: $containerWidth, $widthTo: $minWidth) {
     @if ($startSize==0) {
@@ -120,6 +124,8 @@ $responsiveType: 1;
     }
 }
 
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
 * {
     padding: 0;
     margin: 0;
@@ -179,6 +185,10 @@ body {
     background-color: $white;
 }
 
+body .no-scroll {
+    overflow: hidden;
+}
+
 .wrapper {
     min-height: 100%;
     overflow: clip;
@@ -199,10 +209,14 @@ body {
 }
 
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    transition: transform 0.5s ease;
     background-color: $dark-green;
-    height: toRem(79);
-    position: relative;
-    z-index: 5;
+    @include adaptiveValue("height", 79, 52, 0, 600, 375);
 
     &__container {
         margin: 0 auto;
@@ -217,8 +231,8 @@ body {
     }
 
     .sideMenu__icon {
-        width: toRem(29);
-        height: toRem(29);
+        @include adaptiveValue("width", 29, 25.667, 0, 600, 375);
+        @include adaptiveValue("height", 29, 25.667, 0, 600, 375);
         transition: all 0.3s ease;
     }
 
@@ -226,12 +240,12 @@ body {
         width: 100%;
     }
 
-    &__logo{
+    &__logo {
         height: toRem(23);
         @include adaptiveValue("height", 23, 13, 0, 1400, 320);
     }
 
-    &__logo img{
+    &__logo img {
         height: 100%;
         width: 100%;
     }
@@ -247,6 +261,10 @@ body {
         display: flex;
         justify-content: start;
         align-items: center;
+    }
+
+    &__nav.no-transition {
+        transition: none !important;
     }
 
     &__menu {
@@ -270,14 +288,17 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: toRem(9) toRem(8.51) toRem(8.44) toRem(8);
+        @include adaptiveValue("padding-top", 9, 6, 0, 600, 375);
+        @include adaptiveValue("padding-right", 8.51, 5.51, 0, 600, 375);
+        @include adaptiveValue("padding-bottom", 9.44, 6.44, 0, 600, 375);
+        @include adaptiveValue("padding-left", 8, 5, 0, 600, 375);
         border: solid 1px $white;
         border-radius: 50%;
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
 
         img {
-            width: toRem(17.485);
-            height: toRem(15.559);
+            @include adaptiveValue("width", 17.485, 12.24, 0, 600, 375);
+            @include adaptiveValue("height", 15.559, 10.892, 0, 600, 375);
         }
     }
 
@@ -287,6 +308,10 @@ body {
     }
 }
 
+.header.hidden {
+    transform: translateY(-100%);
+}
+
 @media (max-width: toRem(850)) {
     .header {
         &__nav {
@@ -294,19 +319,17 @@ body {
             position: fixed;
             background-color: $dark-green;
             left: 0;
-            top: toRem(79);
-            // width: 50vw;
+            @include adaptiveValue("top", 79, 52, 0, 600, 375);
             height: 100vh;
             justify-content: center;
             align-items: start;
             padding: toRem(50);
             transform: translateX(-100%);
-            // transition: transform 0.5s ease;
+            transition: transform 0.5s ease;
         }
 
         .active_sideMenu {
             transform: translateX(0);
-            transition: transform 0.5s ease;
         }
 
         &__menu {
@@ -324,41 +347,53 @@ body {
     }
 }
 
-@media (max-width: $pc) {}
 
-@media (max-width: $tablet) {
-    .header {
 
-        // background-color: #000;
-        &__logo {
-            height: toRem(18);
-        }
 
+.hero {
+    @include adaptiveValue("margin-top", 79, 52, 0, 600, 375);
+
+    &__container {
+        padding-top: toRem(46);
+        padding-bottom: toRem(46);
     }
 
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__content-text {
+        background-color: $light-grey;
+        padding-left: toRem(79);
+        padding-top: toRem(125);
+
+        .hero-title {
+            max-width: toRem(410);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        
+        .hero-title-description {}
+
+        .big-title-description {}
+    }
+
+    &__btn {}
+
+    &__content-img {}
 }
 
-@media (max-width: $mobile) {}
-
-@media (max-width: $mobileSmall) {
-    .header{
-        .sideMenu__icon{
-            width: toRem(25.67);
-            height: toRem(25.67);
-        }
-        &__cart {
-            padding: toRem(6) toRem(5.66) toRem(6.31) toRem(5.3);
-        a {
-            display: inline-block;
-            width: toRem(12.24);
-            height: toRem(10.892);
-        }
-
-        img {
-            width: toRem(12.24);
-            height: toRem(10.892);
-        }
-    }
-    }
-    
+.new-collection {
+    font-size: toRem(14);
+    font-weight: 500;
+    line-height: 1.36;
+    letter-spacing: toRem(1.35);
 }
+
+.big-title {}
+
+.btn {}
+
+
+
