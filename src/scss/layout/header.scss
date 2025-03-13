@@ -1,7 +1,3 @@
-// @use "../base/mixins";
-// @use "../base/variable";
-// @use "../base/reset";
-
 .header {
     position: fixed;
     top: 0;
@@ -69,11 +65,11 @@
 
         li {
             color: $white;
-            font-size: toRem($main-font-size);
+            font-size: toRem($fontSize);
             font-weight: 400;
         }
 
-        li:hover {
+        li a:hover {
             text-decoration: underline;
         }
     }
@@ -88,8 +84,7 @@
         @include adaptiveValue("padding-left", 8, 5, 0, 600, 375);
         border: solid 1px $white;
         border-radius: 50%;
-        transition: all 0.3s ease;
-
+        transition: transform 0.3s ease;
         img {
             @include adaptiveValue("width", 17.485, 12.24, 0, 600, 375);
             @include adaptiveValue("height", 15.559, 10.892, 0, 600, 375);
@@ -109,7 +104,6 @@
 @media (max-width: toRem(850)) {
     .header {
         &__nav {
-            // display: none;
             position: fixed;
             background-color: $dark-green;
             left: 0;
@@ -140,3 +134,11 @@
 
     }
 }
+
+@media (max-width: $pc) {}
+
+@media (max-width: $tablet) {}
+
+@media (max-width: $mobile) {}
+
+@media (max-width: $mobileSmall) {}
