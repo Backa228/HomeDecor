@@ -385,3 +385,83 @@
         @include adaptiveValue("margin-bottom", 7, 11, 0, 600, 320);
     }
 }
+
+.more {
+    &__container {
+        @include adaptiveValue("padding-bottom", 60, 40, 0, 1400, 320);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__title {
+        @include adaptiveValue("font-size", 40, 24, 0, 1400, 320);
+        @include adaptiveValue("max-width", 500, 211, 0, 1400, 320);
+        text-align: center;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    &__title:not(:last-child){
+        @include adaptiveValue("margin-bottom", 50, 24, 0, 1400, 320);
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+    }
+
+    &__image img{
+        width: 100%;
+        height: 100%;
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: roRem(15);
+    }
+}
+
+.content-left {}
+
+.content-right {}
+
+.left-title {
+    @include adaptiveValue("font-size", 22, 16, 0, 600, 320);
+    font-weight: 600;
+    line-height: 1.75;
+}
+
+.left-title:not(:last-child){
+    @include adaptiveValue("margin-bottom", 17.68, 7, 0, 1400, 320);
+}
+
+.left-text {
+    @include adaptiveValue("font-size", 17, 12, 0, 1400, 320);
+    line-height: 1.5;
+    letter-spacing: toRem(0.25);
+}
+
+.content-more-right{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.more__btn {
+    @include adaptiveValue("width", 196, 144, 0, 1400, 320);
+    @include adaptiveValue("height", 50, 35, 0, 1400, 320);
+}
+
+@media(max-width: toRem(600)) {
+    .more__content{
+       grid-template-columns: 1fr;
+       gap: toRem(25);
+    }
+
+    .content-more-right {
+        justify-content: start;
+        align-items: center;
+    }
+}
