@@ -32,7 +32,7 @@
 }
 
 /*#endregion Модулі*/
-
+/* #region hero*/
 .hero {
     @include adaptiveValue("margin-top", 79, 52, 0, 600, 375);
 
@@ -130,7 +130,8 @@
         grid-template-columns: 1fr;
     }
 }
-
+/*#endregion hero*/
+/*#region collections*/
 .collections {
     &__container {
         @include adaptiveValue("padding-bottom", 92, 40, 0, 1400, 320);
@@ -276,7 +277,8 @@
         @include adaptiveValue("background-size", 287, 188, 0, 600, 320);
     }
 }
-
+/*#endregion collections*/
+/*#region purchase*/
 .purchase{
     @include adaptiveValue("height", 568, 243, 0, 1400, 320);
     background: url(../../img/purchase__background.jpg) no-repeat center / cover;
@@ -310,10 +312,9 @@
         @include adaptiveValue("width", 196, 144, 0, 1400, 320);
         @include adaptiveValue("height", 50, 35, 0, 1400, 320);
     }
-
-
 }
-
+/*#endregion purchase*/
+/*#region benefits*/
 .benefits {
     &__container {
         @include adaptiveValue("padding-top", 80, 40, 0, 1400, 320);
@@ -385,7 +386,8 @@
         @include adaptiveValue("margin-bottom", 7, 11, 0, 600, 320);
     }
 }
-
+/*#endregion benefits*/
+/*#region more*/
 .more {
     &__container {
         @include adaptiveValue("padding-bottom", 60, 40, 0, 1400, 320);
@@ -465,7 +467,8 @@
         align-items: center;
     }
 }
-
+/*#endregion more*/
+/*#region bestSellers*/
 .bestSellers {
     &__container {
         display: flex;
@@ -509,7 +512,7 @@
 
     &__image img {
         width: 100%;
-        height: 100%
+        height: auto;
     }
 
     &__content {
@@ -553,49 +556,4 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
-.product {
-    &__image:not(:last-child) {
-        @include adaptiveValue("margin-bottom", 15, 7, 0, 1400, 320);
-    }
-
-    &__image img{
-        width: 100%;
-        height: 100%;
-    }
-
-    &__content {
-        display: flex;
-        justify-content: space-between;
-        gap: toRem(10);
-    }
-
-    &__text h3{
-        @include adaptiveValue("font-size", 17, 12, 0, 1400, 320);
-        font-weight: 600;
-        line-height: 1.6;
-    }
-
-    &__text p{
-        @include adaptiveValue("font-size", 17, 10, 0, 1400, 320);
-        font-weight: 400;
-        line-height: 1.4;
-        letter-spacing: 0.15px;
-    }
-
-    &__icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: $background-light-grey;
-        border-radius: 25px;
-        @include adaptiveValue("width", 40, 24, 0, 1400, 320);
-        @include adaptiveValue("height", 40, 24, 0, 1400, 320);
-    }
-
-    &__icon img{
-        @include adaptiveValue("width", 16, 10, 0, 1400, 320);
-        height: auto;
-    }
-}
-
+/*#endregion bestSellers*/
