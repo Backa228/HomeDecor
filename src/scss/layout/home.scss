@@ -154,8 +154,10 @@
     &__companies {
         display: flex;
         justify-content: space-between;
-        @include adaptiveValue("gap", 40, 20, 0, 1400, 320);
+        @include adaptiveValue("gap", 40, 15, 0, 1400, 320);
         flex-wrap: wrap;
+        @include adaptiveValue("padding-left", 0, 18, 0, 600, 320);
+        @include adaptiveValue("padding-right", 0, 18, 0, 600, 320);
     }
 }
 
@@ -422,6 +424,8 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: roRem(15);
+        @include adaptiveValue("padding-left", 0, 18, 0, 600, 320);
+        @include adaptiveValue("padding-right", 0, 18, 0, 600, 320);
     }
 }
 
@@ -537,16 +541,22 @@
     &__icon {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: center;   
         background-color: $background-light-grey;
         @include adaptiveValue("width", 40, 24, 0, 1400, 320);
         @include adaptiveValue("height", 40, 24, 0, 1400, 320);
         border-radius: toRem(25);
+        transition: transform 0.3s ease;
+        cursor: pointer;
     }
 
     &__icon img {
         @include adaptiveValue("width", 16, 10, 0, 1400, 320);
         height: auto;
+    }
+    
+    &__icon:hover {
+        transform: scale(1.1);
     }
 
 }

@@ -10,6 +10,8 @@ import { js } from "./gulp/tasks/js.js"
 import { images } from "./gulp/tasks/images.js";
 
 global.app = {
+    isBuild: process.argv.includes('--build'),
+    isDev: !process.argv.includes('--build'),
     path: path,
     gulp: gulp, 
     plugins: plugins
