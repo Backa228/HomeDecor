@@ -1,4 +1,8 @@
 import webp from "gulp-webp";
+import imageminMozjpeg from "imagemin-mozjpeg";
+import imageminPngquant from "imagemin-pngquant";
+import imageminSvgo from "imagemin-svgo";
+
 
 export const images = async () => {
    const imagemin = (await import("gulp-imagemin")).default;
