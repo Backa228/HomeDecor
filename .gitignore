@@ -22,4 +22,4 @@ gulpfile.js.map
 .vscode/
 .idea/
 .DS_Store
-Thumbs.db
+Thumbs.dbdist/
